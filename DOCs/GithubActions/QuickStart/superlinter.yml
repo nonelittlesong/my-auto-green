@@ -1,0 +1,31 @@
+name: Super-Linter
+
+# Run this workflow every time a new commit pushed to your repository
+# 推送 commit 时触发工作流
+on: push
+
+jobs:
+  # Set the job key. The key is displayed as the job name
+  # when a job name is not provided
+  # 当没有给任务命名时，任务键就作为名字
+  super-lint:
+    # Name the Job
+    # 给任务命名
+    name: Lint code base
+    # Set the type of machine to run on
+    # 设置运行环境
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks out a copy of your repository on the ubuntu-latest machine
+      # 在设置的环境中拷贝当前的代码库
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Runs the Super-Linter action
+      # 运行代码检查的动作
+      - name: Run Super-Linter
+        uses: github/super-linter@v3
+        env:
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
