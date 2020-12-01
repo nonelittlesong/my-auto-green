@@ -1,4 +1,8 @@
 #!/bin/bash
+#
+# 将 Github 的代码备份到 Gitee
+
+# --------- 读取参数 ---------
 
 DEBUG="${INPUT_DEBUG}"
 
@@ -39,11 +43,11 @@ TIME_OUT="${INPUT_TIMEOUT}"
 RETRY_TIMES=3
 
 function err_exit {
-  echo -e "\033[31m $1 \033[0m"
+  echo -e "\033[31m $1 \033[0m" # -e 允许转义
   exit 1
 }
 
-FAILED_LIST=()
+FAILED_LIST=() # 
 
 function delay_exit {
   echo -e "\033[31m $1 \033[0m"
@@ -82,6 +86,18 @@ else
   err_exit "Unknown src args, the `src` should be `[github|gittee]/account`"
 fi
 
+#######################################
+# 超时重新执行指令，直到超过次数限制
+# Globals:
+#   RETRY_TIMES 重新执行命令的次数限制
+#   TIME_OUT    超时时间
+# Arguments:
+#   待执行的命令
+# Outputs:
+#   输出执行命令的次数，下次执行的等待时间
+# Returns:
+#   0 如果命令未超时，命令超时返回最后一次的状态
+#######################################
 function retry {
   local retries=$RETRY_TIMES
   local count=0
@@ -100,9 +116,17 @@ function retry {
   return 0
 }
 
+#######################################
+# 获取所有的仓库名
+# Arguments:
+#   源仓库的地址，一个 URL
+#   源仓库类型，github 或 gitee
+# Outputs:
+#   URL 下的所有仓库名
+#######################################
 function get_all_repo_names
-{
-  PAGE_NUM=100
+{ # 为何不定义为局部变量？
+  PAGE_NUM=100 
   URL=$1
   HUB_TYPE=$2
   if [[ "$HUB_TYPE" == "github" ]]; then
