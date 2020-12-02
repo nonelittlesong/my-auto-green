@@ -1,9 +1,6 @@
 name: autogreen
 
 on:
-  push:
-    branches:
-      - master
   schedule:
     - cron: "11 11 * * *"
 
