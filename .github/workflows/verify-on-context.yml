@@ -35,3 +35,9 @@ jobs:
         env:
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
         run: echo "$MATRIX_CONTEXT"
+      
+      - name: Dump env
+        run: |
+          echo "HOME: $HOME"
+          echo "GITHUB_EVENT_PATH: $GITHUB_EVENT_PATH"
+          
