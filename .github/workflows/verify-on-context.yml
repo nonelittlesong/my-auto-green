@@ -40,4 +40,5 @@ jobs:
         run: |
           echo "HOME: $HOME"
           echo "GITHUB_EVENT_PATH: $GITHUB_EVENT_PATH"
-          
+          echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+          echo "GITHUB_WORKFLOW: $GITHUB_WORKFLOW"
