@@ -13,37 +13,46 @@ inputs:
     required: true
   dst:
     description: "Destination name. Such as `gitee/kunpengcompute`."
-    requreid: true
+    required: true
   src:
     description: "Source name. Such as `github/kunpengcompute`."
     required: true
   account_type:
     description: "The account type. Such as org, user."
     default: 'user'
+    required: false
   clone_style:
     description: "The git clone style, https or ssh."
     default: 'https'
+    required: false
   cache_path:
     description: "The path to cache the source repos code."
     default: '/github/workspace/hub-mirror-cache'
+    required: false
   black_list:
     description: "High priority, the black list of mirror repo. like 'repo1,repo2,repo3'"
     default: ''
+    required: false
   white_list:
     description: "Low priority, the white list of mirror repo. like 'repo1,repo2,repo3'"
     default: ''
+    required: false
   static_list:
     description: "Only mirror repo in the static list, but don't get from repo api (the white/black list is still available). like 'repo1,repo2,repo3'"
     default: ''
+    required: false
   force_update:
     description: "Force to update the destination repo, use '-f' flag to do 'git push'"
-    default: false
+    default: 'false'
+    required: false
   debug:
     description: "Enable the debug flag to show details log"
-    default: false
+    default: 'false'
+    required: false
   timeout:
     description: "Set the timeout for every git command, like '600'=>600s, '30m'=>30mins, '1h'=>1hour"
     default: '30m'
+    required: false
 runs:
   using: "docker"
   image: "Dockerfile"
