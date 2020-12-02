@@ -167,15 +167,23 @@ fi
 
 DST_REPOS=`get_all_repo_names $DST_REPO_LIST_API $DST_TYPE`
 
+#######################################
+# 代码库不在本地时，克隆代码库，并进入对应的目录
+# Arguments:
+#   代码库的 url
+#######################################
 function clone_repo
 {
   echo -e "\033[31m(0/3)\033[0m" "Downloading..."
-  if [ ! -d "$1" ]; then
+  if [ ! -d "$1" ]; then # 代码库不在本地
     retry git clone $SRC_REPO_BASE_URL$SRC_ACCOUNT/$1.git
   fi
   cd $1
 }
 
+#######################################
+# 在目标 HUB 中创建没有的代码库
+# 
 function create_repo
 {
   # Auto create non-existing repo
@@ -200,7 +208,7 @@ function update_repo
 function import_repo
 {
   echo -e "\033[31m(2/3)\033[0m" "Importing..."
-  git remote set-head origin -d
+  git remote set-head origin -d # 删除 `refs/remotes/origin/HEAD`
   if [[ "$FORCE_UPDATE" == "true" ]]; then
     retry git push -f $DST_TYPE refs/remotes/origin/*:refs/heads/* --tags --prune
   else
@@ -210,14 +218,18 @@ function import_repo
 
 function _check_in_list () {
   local e match="$1"
-  shift
+  shift # 将位置参数左移一位
   for e; do [[ "$e" == "$match" ]] && return 0; done
   return 1
 }
 
+#######################################
+# 
+# Arguments:
+#   一个代码库
 function test_black_white_list
 {
-  WHITE_ARR=(`echo $WHITE_LIST | tr ',' ' '`)
+  WHITE_ARR=(`echo $WHITE_LIST | tr ',' ' '`) # 用 ' ' 替换 ','
   BLACK_ARR=(`echo $BLACK_LIST | tr ',' ' '`)
   _check_in_list $1 "${WHITE_ARR[@]}";in_white_list=$?
   _check_in_list $1 "${BLACK_ARR[@]}";in_back_list=$?
