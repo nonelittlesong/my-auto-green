@@ -1,12 +1,14 @@
-on: push
 name: Tests / test-user-mirror (cached)
+
+on: push
+
 jobs:
   run:
     name: Run
     runs-on: ubuntu-latest
     steps:
     - name: Checkout source code
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
 
     - name: Get Time
       id: get-time
@@ -15,10 +17,11 @@ jobs:
       shell: bash
 
     - name: Cache src repos
-      uses: actions/cache@v1
+      uses: actions/cache@v2
       id: cache
       with:
         path: ${{ github.workspace }}/hub-mirror-cache
+        # 确保每次 key 不一样，以更新 cache
         key: ${{ runner.os }}-hub-repos-cache-${{ steps.get-time.outputs.date }}
         restore-keys: ${{ runner.os }}-hub-repos-cache
 

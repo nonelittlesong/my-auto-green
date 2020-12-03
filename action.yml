@@ -12,10 +12,10 @@ inputs:
     description: "The app token which is used to create repo in destination hub."
     required: true
   dst:
-    description: "Destination name. Such as `gitee/kunpengcompute`."
+    description: "Destination name. Such as `gitee/nonelittlesong`."
     required: true
   src:
-    description: "Source name. Such as `github/kunpengcompute`."
+    description: "Source name. Such as `github/nonelittlesong`."
     required: true
   account_type:
     description: "The account type. Such as org, user."
@@ -27,7 +27,7 @@ inputs:
     required: false
   cache_path:
     description: "The path to cache the source repos code."
-    default: '/github/workspace/hub-mirror-cache'
+    default: '/github/workspace/github-cache'
     required: false
   black_list:
     description: "High priority, the black list of mirror repo. like 'repo1,repo2,repo3'"

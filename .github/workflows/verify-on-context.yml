@@ -1,4 +1,5 @@
-# name: Tests / test-contexts
+# 不使用 name，${{ github.workflow }} 默认为此文件的完整路径
+name: Tests / test-contexts
 
 on: push
 

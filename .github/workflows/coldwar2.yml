@@ -1,0 +1,40 @@
+name: Has USA forbidden Chinese to access GitHub yet?
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    # Runs at 20:00 UTC (4:00 AM Beijing) every Monday.
+    - cron: '0 20 * * 1'
+
+jobs:
+  coldwar2:
+    name: Just in case
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Time
+        id: get-time
+        run: |
+          echo "::set-output name=date::$(/bin/date -u "+%Y%m%d%H%M%S")" # -u 表示 UTC 时间
+        shell: bash
+
+      - name: Cache my github repos
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace }}/github-cache
+          key: ${{ runner.os }}-github-cache-${{ steps.get-time.outputs.date }}
+          restore-key: ${{ runner.os }}-github-cache
+
+      - name: Mirror GitHub to Gitee with static list and cache
+        uses: ./.
+        with:
+          src: github/nonelittlesong
+          dst: gitee/nonelittlesong
+          dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
+          dst_token: ${{ secrets.GITEE_TOKEN }}
+          account_type: user
+          cache_path: /github/workspace/github-cache
+          timeout: 600
+          force_update: false
+          static_list: 'none-actions'
