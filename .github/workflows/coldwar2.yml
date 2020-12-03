@@ -40,4 +40,4 @@ jobs:
           cache_path: /github/workspace/github-cache
           timeout: 600
           force_update: false
-          static_list: 'none-actions'
+          static_list: 'none-actions,study-web'
