@@ -37,8 +37,8 @@ jobs:
         with:
           src: gitee/nonelittlesong
           dst: github/nonelittlesong
-          dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
-          dst_token: ${{ secrets.GITEE_TOKEN }}
+          dst_key: ${{ secrets.HUB_PRIVATE_KEY }}
+          dst_token: ${{ secrets.HUB_TOKEN }}
           static_list: 'gitee-mirror-test'
           cache_path: ${{ github.workspace }}/gitee-mirror-cache
           account_type: user
