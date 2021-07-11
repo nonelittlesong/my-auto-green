@@ -1,0 +1,50 @@
+name: tee2hub
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    # Runs at 21:00 UTC (5:00 AM Beijing) every Monday.
+    - cron: '1 21 * * 1'
+
+jobs:
+  run:
+    name: Sync Gitee to Github(Cached)
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Get repo and time
+        id: info
+        uses: actions/github-script@v4.0.2
+        with:
+          result-encoding: string
+          script: |
+            core.setOutput('time', new Date(Date.now()).toISOString().replace(/[^0-9]/g, ""));
+            core.setOutput('key', `${context.repo.owner}-${context.repo.repo}`);
+            return context.repo.repo;
+
+      - name: Cache src repo
+        uses: actions/cache@v2.1.6
+        id: cache
+        with:
+          path: ${{ github.workspace }}/gitee-mirror-cache
+          key: {{ runner.os }}-${{ steps.info.outputs.key }}-cache-${{ steps.info.outputs.time }}
+          restore-keys: ${{ runner.os }}-${{ steps.info.outputs.key }}-cache-
+
+      - name: Mirror the Gitee repo to Github with cache
+        uses: Yikun/hub-mirror-action@v1.1
+        with:
+          src: gitee/nonelittlesong
+          dst: github/nonelittlesong
+          dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
+          dst_token: ${{ secrets.GITEE_TOKEN }}
+          static_list: 'gitee-mirror-test'
+          cache_path: ${{ github.workspace }}/gitee-mirror-cache
+          account_type: user
+          force_update: false
+          timeout: 600
+
+      - name: Print cache path
+        run: |
+          ls -la ${{ github.workspace }}/gitee-mirror-cache
