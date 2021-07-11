@@ -29,7 +29,7 @@ jobs:
         id: cache
         with:
           path: ${{ github.workspace }}/gitee-mirror-cache
-          key: {{ runner.os }}-${{ steps.info.outputs.key }}-cache-${{ steps.info.outputs.time }}
+          key: ${{ runner.os }}-${{ steps.info.outputs.key }}-cache-${{ steps.info.outputs.time }}
           restore-keys: ${{ runner.os }}-${{ steps.info.outputs.key }}-cache-
 
       - name: Mirror the Gitee repo to Github with cache
