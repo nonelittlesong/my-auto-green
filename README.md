@@ -4,6 +4,7 @@
 | --- | --- | --- |
 | Auto Green | ![autogreen.yml](https://github.com/nonelittlesong/none-actions/actions/workflows/autogreen.yml/badge.svg)| [justjavac/auto-green](https://github.com/justjavac/auto-green) |
 | Hub Mirror | ![coldwar2.yml](https://github.com/nonelittlesong/none-actions/actions/workflows/coldwar2.yml/badge.svg) | [Yikun/hub-mirror-action](https://github.com/Yikun/hub-mirror-action)
+| Gitee Mirror | ![gitee-mirror.yml](https://github.com/nonelittlesong/none-actions/actions/workflows/gitee-mirror.yml/badge.svg) | [Hub Mirror Action](https://github.com/marketplace/actions/hub-mirror-action)
 
 - [Github Actions 简介](https://docs.github.com/cn/actions/learn-github-actions/introduction-to-github-actions)
 
