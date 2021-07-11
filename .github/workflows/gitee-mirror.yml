@@ -40,7 +40,7 @@ jobs:
           dst_key: ${{ secrets.HUB_PRIVATE_KEY }}
           dst_token: ${{ secrets.HUB_TOKEN }}
           static_list: 'gitee-mirror-test'
-          cache_path: ${{ github.workspace }}/gitee-mirror-cache
+          cache_path: /github/workspace/gitee-mirror-cache
           account_type: user
           force_update: false
           timeout: 600
