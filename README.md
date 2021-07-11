@@ -1,26 +1,15 @@
-# auto-green
+# Actions
 
-[![Build Status](https://github.com/justjavac/auto-green/workflows/ci/badge.svg?branch=master)](https://github.com/justjavac/auto-green/actions)
+| Action | Status | Reference |
+| --- | --- | --- |
+| Auto Green | ![autogreen.yml](https://github.com/nonelittlesong/none-actions/actions/workflows/autogreen.yml/badge.svg)| [justjavac/auto-green](https://github.com/justjavac/auto-green) |
+| Hub Mirror | ![coldwar2.yml](https://github.com/nonelittlesong/none-actions/actions/workflows/coldwar2.yml/badge.svg) | [Yikun/hub-mirror-action](https://github.com/Yikun/hub-mirror-action)
 
-自动保持 GitHub 提交状态常绿。
+- [Github Actions 简介](https://docs.github.com/cn/actions/learn-github-actions/introduction-to-github-actions)
 
-> a commit a day keeps your girlfriend away.
+## Cron
 
-## 原理
-
-使用 GitHub Actions 的定时任务功能，每隔一段时间自动执行 `git commit`，提交信息为 "a commit a day keeps your girlfriend away"，灵感来自知乎问题[在 GitHub 上保持 365 天全绿是怎样一种体验？](https://www.zhihu.com/question/34043434/answer/57826281)下某匿名用户的回答：
-
-> 曾经保持了 200 多天全绿，但是冷落了女朋友，一直绿到现在。
-
-## 使用
-
-- 点右上角 **Fork** 按钮复制本 GitHub 仓库
-- 在自己的项目中，点上方 **Actions** 选项卡进入项目 GitHub Actions 页面, 点击绿色按钮 “**I understand my workflows, go ahead and enable them**” 开启自动提交功能
-- (可选) 你可以通过修改 [ci.yml 文件的第 8 行](https://github.com/justjavac/auto-green/blob/master/.github/workflows/ci.yml#L8)来调整频率
-
-计划任务语法有 5 个字段，中间用空格分隔，每个字段代表一个时间单位。
-
-```plain
+```
 ┌───────────── 分钟 (0 - 59)
 │ ┌───────────── 小时 (0 - 23)
 │ │ ┌───────────── 日 (1 - 31)
@@ -45,4 +34,4 @@
 
 ## License
 
-[auto-green](https://github.com/justjavac/auto-green) is released under the MIT License. See the bundled [LICENSE](./LICENSE) file for details.
+- [auto-green](https://github.com/justjavac/auto-green) is released under the MIT License. See the bundled [LICENSE](./LICENSE) file for details.
